@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Mis tareas y mi blog | Pruebas de software</title>
+    <link rel="stylesheet" href="./style/home.css">
+    <script type="module" src="./app.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="./home.html" aria-label="Inicio">
+            <span class="brand-mark" aria-hidden="true">✓</span>
+            <span>Mi espacio</span>
+        </a>
+        <div class="header-account">
+            <span id="account-name" class="header-note"></span>
+            <button id="logout-button" class="text-button" type="button" hidden>Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="intro" aria-labelledby="page-title">
+            <p class="eyebrow">ORGANIZA Y COMPARTE</p>
+            <h1 id="page-title">Un paso a la vez.</h1>
+            <p class="intro-copy">Organiza tus tareas, escribe publicaciones y comparte tus ideas.</p>
+        </section>
+
+        <nav class="primary-nav" aria-label="Secciones de la aplicación">
+            <button class="nav-button" type="button" data-page="tasks" hidden>Mis tareas</button>
+            <button class="nav-button" type="button" data-page="blog">Blog</button>
+            <button class="nav-button is-active" type="button" data-page="account">Mi cuenta</button>
+        </nav>
+
+        <section id="tasks-page" class="page-panel task-card" data-page-panel="tasks" aria-label="Administrar tareas" hidden>
+            <form id="task-form" class="task-form">
+                <label class="sr-only" for="task-input">Nueva tarea</label>
+                <input id="task-input" name="task" type="text" maxlength="120"
+                    placeholder="¿Qué necesitas hacer?" autocomplete="off" required>
+                <button class="add-button" type="submit"><span aria-hidden="true">+</span> Agregar</button>
+            </form>
+
+            <div class="list-toolbar">
+                <p id="task-count" class="task-count">0 tareas</p>
+                <nav class="filters" aria-label="Filtrar tareas">
+                    <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">Todas</button>
+                    <button class="filter-button" type="button" data-filter="pending" aria-pressed="false">Pendientes</button>
+                    <button class="filter-button" type="button" data-filter="completed" aria-pressed="false">Completadas</button>
+                </nav>
+            </div>
+
+            <ul id="task-list" class="task-list" aria-label="Tareas"></ul>
+            <p id="empty-state" class="empty-state">
+                <span class="empty-icon" aria-hidden="true">✦</span>
+                <span>Aún no hay tareas. Agrega la primera para empezar.</span>
+            </p>
+        </section>
+
+        <section id="blog-page" class="page-panel blog-card" data-page-panel="blog" aria-labelledby="blog-title" hidden>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">IDEAS DE LA COMUNIDAD</p>
+                    <h2 id="blog-title">El blog</h2>
+                </div>
+                <p class="section-hint">Lee publicaciones o inicia sesión para escribir.</p>
+            </div>
+            <form id="post-form" class="post-form" hidden>
+                <label for="post-title">Título de la publicación</label>
+                <input id="post-title" name="title" type="text" minlength="3" maxlength="120"
+                    placeholder="Dale un título a tu idea" required>
+                <label for="post-content">¿Qué quieres compartir?</label>
+                <textarea id="post-content" name="content" rows="5" maxlength="10000"
+                    placeholder="Escribe aquí tu publicación..." required></textarea>
+                <button class="add-button" type="submit">Publicar</button>
+            </form>
+            <div id="post-list" class="post-list" aria-live="polite"></div>
+            <p id="blog-empty" class="empty-state">Todavía no hay publicaciones. ¡Puedes escribir la primera!</p>
+        </section>
+
+        <section id="account-page" class="page-panel task-card account-card" data-page-panel="account" aria-labelledby="account-title">
+            <p class="eyebrow">TU ESPACIO PERSONAL</p>
+            <h2 id="account-title">Inicia sesión o crea una cuenta</h2>
+            <p id="account-description" class="section-hint">Regístrate para guardar tus tareas y publicar en el blog.</p>
+
+            <div id="auth-forms">
+                <div class="auth-switch" role="group" aria-label="Elegir acceso">
+                    <button class="filter-button is-active" type="button" data-auth-mode="login" aria-pressed="true">Iniciar sesión</button>
+                    <button class="filter-button" type="button" data-auth-mode="register" aria-pressed="false">Registrarme</button>
+                </div>
+
+                <form id="login-form" class="auth-form">
+                    <label for="login-email">Correo electrónico</label>
+                    <input id="login-email" name="email" type="email" autocomplete="email" required>
+                    <label for="login-password">Contraseña</label>
+                    <input id="login-password" name="password" type="password" minlength="8"
+                        autocomplete="current-password" required>
+                    <button class="add-button" type="submit">Iniciar sesión</button>
+                </form>
+
+                <form id="register-form" class="auth-form" hidden>
+                    <label for="register-name">Nombre</label>
+                    <input id="register-name" name="name" type="text" minlength="2" maxlength="50"
+                        autocomplete="name" required>
+                    <label for="register-email">Correo electrónico</label>
+                    <input id="register-email" name="email" type="email" autocomplete="email" required>
+                    <label for="register-password">Contraseña (mínimo 8 caracteres)</label>
+                    <input id="register-password" name="password" type="password" minlength="8" maxlength="128"
+                        autocomplete="new-password" required>
+                    <button class="add-button" type="submit">Crear cuenta</button>
+                </form>
+            </div>
+            <p id="account-signed-in" class="signed-in-message" hidden></p>
+        </section>
+
+        <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+        <p class="privacy-note"><span aria-hidden="true">🔒</span> Tus tareas se guardan en este dispositivo.</p>
+    </main>
+
+    <footer class="site-footer">Hecho para practicar y probar software.</footer>
+</body>
+</html>
