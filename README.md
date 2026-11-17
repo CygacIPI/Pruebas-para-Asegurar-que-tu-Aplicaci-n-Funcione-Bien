@@ -17,5 +17,9 @@ Esta aplicación incluye una lista de tareas, un blog pequeño y un sistema de r
     - Aplicacion: ´npm start´, luego abrir el enlace ´http://127.0.0.1:3000´
     - Pruebas: ´npm test´
 
+# Pruebas automáticas con GitHub Actions
+
+El flujo de trabajo de GitHub Actions en `.github/workflows/tests.yml` ejecuta `npm ci` y `npm test` automáticamente cada vez que se suben cambios (`push`) o se crea/actualiza un pull request. También se puede iniciar manualmente desde la pestaña **Actions** del repositorio con **Run workflow**.
+
 - Daniel Rivera, #18, DAAI
 - IMASI
